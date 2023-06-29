@@ -1,7 +1,11 @@
 package com.jeantesla.representativekafkaeventsproducer.data;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Repository;
+
 import java.util.Arrays;
 
+@Repository
 public class ClientData {
 
     public int getClient(long hardwareId){

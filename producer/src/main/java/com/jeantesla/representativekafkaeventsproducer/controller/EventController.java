@@ -12,9 +12,10 @@ public class EventController {
 
     private final EventRedirectService eventRedirectService;
 
-    public  EventController(EventRedirectService eventRedirectService){
+    public EventController(EventRedirectService eventRedirectService) {
         this.eventRedirectService = eventRedirectService;
     }
+
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
