@@ -18,13 +18,13 @@ public class KafkaProducer {
     @Autowired
     private KafkaTemplate<String, Event> kafkaTemplate;
 
-    public void sendMessage(String messageKey, Event data){
+    public void sendMessage(int messageKey, Event data){
         Message<Event> message = MessageBuilder
                 .withPayload(data)
                 .setHeader(KafkaHeaders.TOPIC, "hardware-events")
-                .setHeader(KafkaHeaders.MESSAGE_KEY, messageKey)
-
+                .setHeader(KafkaHeaders.MESSAGE_KEY,messageKey)
                                 .build();
+
         kafkaTemplate.send(message);
         LOGGER.info(String.format("Message sent -> %s", data.toString()));
     }
