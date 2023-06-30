@@ -1,10 +1,11 @@
 package com.jeantesla.representativekafkaeventsproducer.service;
 
-import com.jeantesla.representativekafkaeventsproducer.data.ClientData;
+import com.jeantesla.representativekafkaeventsproducer.dto.request.EventRequestDTO;
+import com.jeantesla.representativekafkaeventsproducer.dto.response.EventResponseDTO;
+import com.jeantesla.representativekafkaeventsproducer.exception.ClientNotFoundException;
 import com.jeantesla.representativekafkaeventsproducer.kafka.KafkaProducer;
 import com.jeantesla.representativekafkaeventsproducer.model.Event;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.jeantesla.representativekafkaeventsproducer.repository.ClientData;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,19 +19,16 @@ public class EventRedirectService {
         this.clientData = clientData;
     }
 
-    private final Logger LOGGER = LoggerFactory.getLogger(EventRedirectService.class);
+    public EventResponseDTO execute(EventRequestDTO eventRequestDTO){
 
-    public void execute(Event event){
-        long hardwareId = event.getHardwareId();
+        Event event = eventRequestDTO.toEntity();
+        int clientId = clientData.getClient(event.getHardwareId());
 
-        int clientId = clientData.getClient(hardwareId);
-
-        if(clientId == 0){
-            LOGGER.info("No customers found for this event");
-            return;
-        }
+        if(clientId == 0) throw new ClientNotFoundException();
 
         kafkaProducer.sendMessage(clientId, event);
+
+        return EventResponseDTO.fromEntity(event);
     }
 
 }

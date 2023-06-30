@@ -1,9 +1,13 @@
-package com.jeantesla.representativekafkaeventsproducer.data;
+package com.jeantesla.representativekafkaeventsproducer.repository;
 
 import org.springframework.stereotype.Repository;
 
 import java.util.Arrays;
 
+/*
+* Para servir de exemplo para esse projeto, decidi não usar acesso a banco,
+* e sim, retornar valores chumbados.
+* */
 @Repository
 public class ClientData {
 

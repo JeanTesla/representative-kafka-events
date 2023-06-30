@@ -22,10 +22,10 @@ public class KafkaProducer {
         Message<Event> message = MessageBuilder
                 .withPayload(data)
                 .setHeader(KafkaHeaders.TOPIC, "hardware-events")
-                .setHeader(KafkaHeaders.MESSAGE_KEY,messageKey)
+                .setHeader(KafkaHeaders.MESSAGE_KEY, Integer.toString(messageKey))
                                 .build();
 
         kafkaTemplate.send(message);
-        LOGGER.info(String.format("Message sent -> %s", data.toString()));
+        LOGGER.info(String.format("Message sent -> %s", data));
     }
 }

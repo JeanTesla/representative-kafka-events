@@ -1,6 +1,7 @@
 package com.jeantesla.representativekafkaeventsproducer.controller;
 
-import com.jeantesla.representativekafkaeventsproducer.model.Event;
+import com.jeantesla.representativekafkaeventsproducer.dto.request.EventRequestDTO;
+import com.jeantesla.representativekafkaeventsproducer.dto.response.EventResponseDTO;
 import com.jeantesla.representativekafkaeventsproducer.service.EventRedirectService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,11 +17,13 @@ public class EventController {
         this.eventRedirectService = eventRedirectService;
     }
 
-
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
     @ResponseStatus(HttpStatus.OK)
-    public void saveEvent(@RequestBody Event event){
-        eventRedirectService.execute(event);
+    public EventResponseDTO saveEvent(@RequestBody EventRequestDTO eventRequestDTO){
+        return eventRedirectService.execute(eventRequestDTO);
     }
 
 }
