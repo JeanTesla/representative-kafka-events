@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+  zoo:
+    image: cfei/zookeeper:latest-multiarch
+    container_name: zookeeper
+    restart: always
+    ports:
+      - 2181:2181
+      - 2888:2888
+      - 3888:3888
+    environment:
+      ZOO_ID: 1
+      ZOO_PORT: 2181
+  
+  kafka1:
+    image: cfei/kafka:latest-multiarch
+    container_name: kafka
+    #restart: always
+    ports:
+      - 9092:9092
+      - 9093:9093
+    volumes:
+      - ~/kafka/data/zookeeper_data:/var/lib/zookeeper/data
+      - ~/kafka/data/zookeeper_log:/var/lib/zookeeper/log
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zoo:2181
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://localhost:9093,EXTERNAL://192.168.1.5:9092
+      KAFKA_LISTENERS: INTERNAL://0.0.0.0:9093,EXTERNAL://0.0.0.0:9092
+      KAFKA_HEAP_OPTS: "-Xmx300M -Xms300M"
+    depends_on:
+      - zoo
