@@ -8,6 +8,16 @@
 		<version>2.7.14-SNAPSHOT</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+	
+	<distributionManagement>
+	    <repository>
+		    <uniqueVersion>false</uniqueVersion>
+		    <id>nexus-release</id>
+		    <name>nexus-release</name>
+		    <url>http://localhost:8082/repository/nexus-release/</url>
+	    </repository>
+	</distributionManagement>
+	
 	<groupId>com.jeantesla</groupId>
 	<artifactId>representative-kafka-events-producer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -110,14 +120,5 @@
 			</releases>
 		</pluginRepository>
 	</pluginRepositories>
-	
-	<distributionManagement>
-	    <repository>
-		    <uniqueVersion>false</uniqueVersion>
-		    <id>nexus-release</id>
-		    <name>nexus-release</name>
-		    <url>http://localhost:8082/repository/nexus-release/</url>
-	    </repository>
-</distributionManagement>
 
 </project>
