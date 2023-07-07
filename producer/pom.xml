@@ -20,7 +20,7 @@
 	
 	<groupId>com.jeantesla</groupId>
 	<artifactId>representative-kafka-events-producer</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>representative-kafka-events-producer</name>
 	<description>Demo project for represent kafka events with mocked UI in HTML and JS</description>
 	<properties>
