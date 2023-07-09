@@ -4,7 +4,7 @@ pipeline {
 
 	tools {
 		maven 'jenkins-maven'
-		jdk 'java-11'
+		jdk 'java-8'
 	}
 
 	stages {
