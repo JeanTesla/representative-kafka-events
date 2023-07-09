@@ -11,37 +11,37 @@ pipeline {
 
 		stage('Build producer application'){
 			steps {
-				bat "cd producer && mvn clean install -DskipTests"
+				sh "cd producer && mvn clean install -DskipTests"
 			}
 		}
 
 		stage('Test producer application'){
 			steps{
-				bat "cd producer && mvn test"
+				sh "cd producer && mvn test"
 			}
 		}
 
 		stage('Deploy producer application') {
 			steps {
-			    bat "cd producer && mvn jar:jar deploy:deploy"
+			    sh "echo running deployment"
 			}
 		}
 		
 		stage('Build consumer application'){
 			steps {
-				bat "cd consumer && mvn clean install -DskipTests"
+				sh "cd consumer && mvn clean install -DskipTests"
 			}
 		}
 
 		stage('Test consumer application'){
 			steps{
-				bat "cd consumer && mvn test"
+				sh "cd consumer && mvn test"
 			}
 		}
 
 		stage('Deploy consumer application') {
 			steps {
-			    bat "cd consumer && mvn jar:jar deploy:deploy"
+			    sh "echo running deployment"
 			}
 		}
 	}
